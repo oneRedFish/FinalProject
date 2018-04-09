@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.minyiyang.finalproject.ListQuestions">
+
+    <ListView android:id="@+id/MultiQuesView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"/>
+
+    <ListView android:id="@+id/NumQuesView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/MultiQuesView" />
+
+    <ListView android:id="@+id/TFQuesView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/NumQuesView" />
+
+    <ProgressBar
+        android:id="@+id/pb"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:layout_above="@+id/lay"
+        style="?android:attr/progressBarStyleHorizontal" />
+<LinearLayout
+    android:id="@+id/lay"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    >
+    <Button
+        android:id="@+id/addMultiQuest"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:layout_alignParentBottom="true"
+        android:text="@string/addMultiQuest" />
+    <Button
+        android:id="@+id/addNumQuest"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="60dp"
+        android:layout_toRightOf="@+id/addMultiQuest"
+        android:layout_alignParentBottom="true"
+        android:text="@string/addNumQuest" />
+    <Button
+        android:id="@+id/addTFQuest"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:layout_toRightOf="@+id/addNumQuest"
+        android:layout_alignParentBottom="true"
+        android:text="@string/addTFQuest" />
+</LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/fl"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:layout_toRightOf="@+id/MultiQuesView"/>
+
+
+</RelativeLayout>

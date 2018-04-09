@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">最终项目</string>
+    <string name="button_quzie">问题</string>
+    <string name="addMultiQuest">单选题</string>
+    <string name="addNumQuest">运算题</string>
+    <string name="addTFQuest">判断题</string>
+    <string name="textQust">题目:</string>
+    <string name="textAns">答案:</string>
+    <string name="input_quest">请在此输入内容</string>
+    <string name="submit">提交</string>
+    <string name="cancle">取消</string>
+    <string name="rbt">正确</string>
+    <string name="rbf">错误</string>
+    <string name="add">添加问题</string>
+    <string name="del">删除</string>
+    <string name="update">更新</string>
+    <string name="set_answer">设置问题</string>
+
+</resources>

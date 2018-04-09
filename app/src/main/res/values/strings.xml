@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">FinalProject</string>
+    <string name="button_quzie">Quize</string>
+    <string name="addMultiQuest">MultiQuest</string>
+    <string name="addNumQuest">NumQuest</string>
+    <string name="addTFQuest">T/F Quest</string>
+    <string name="textQust">Quest:</string>
+    <string name="textAns">Answer:</string>
+    <string name="input_quest">Input question here</string>
+    <string name="submit">submit</string>
+    <string name="cancle">cancle</string>
+    <string name="rbt">true</string>
+    <string name="rbf">fault</string>
+    <string name="add">Add Quest</string>
+    <string name="del">delete</string>
+    <string name="update">update</string>
+    <string name="set_answer">set anwser</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

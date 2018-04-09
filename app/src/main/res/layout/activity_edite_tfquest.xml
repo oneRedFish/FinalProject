@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.minyiyang.finalproject.EditeTFQuest">
+
+    <!--quest-->
+    <TextView
+        android:id="@+id/NumQust"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/textQust"
+        style="@style/textQust"/>
+    <EditText
+        android:id="@+id/Num_quest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NumQust"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="@string/input_quest"
+        android:inputType="textMultiLine"
+        style="@style/input"/>
+    <!--answer-->
+    <TextView
+        android:id="@+id/NumAns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/textAns"
+        android:layout_below="@+id/Num_quest"
+        style="@style/textQust"/>
+    <RadioButton
+        android:id="@+id/rbt"
+        android:layout_width="wrap_content"
+        android:gravity="fill"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NumAns"
+        android:text="@string/rbt" />
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:gravity="fill"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/NumAns"
+        android:layout_toRightOf="@+id/rbt"
+        android:text="@string/rbt" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rbt"
+        >
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_below="@+id/textAnswer4"
+            android:text="@string/submit"
+            android:id="@+id/submit_button2"
+            style="@style/button"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_toRightOf="@+id/submit_button"
+            android:layout_below="@+id/textAnswer4"
+            android:text="@string/cancle"
+            android:id="@+id/cancle_button2"
+            style="@style/button"/>
+    </LinearLayout>
+</RelativeLayout>
