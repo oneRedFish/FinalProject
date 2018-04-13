@@ -140,7 +140,7 @@
         android:layout_weight="1"
         android:layout_toRightOf="@+id/submit_button"
         android:layout_below="@+id/textAnswer4"
-        android:text="@string/cancle"
+        android:text="@string/cancel"
         android:id="@+id/cancle_button"
         style="@style/button"/>
 </LinearLayout>

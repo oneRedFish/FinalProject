@@ -53,7 +53,7 @@
             android:layout_weight="1"
             android:layout_below="@+id/textAnswer4"
             android:text="@string/submit"
-            android:id="@+id/submit_button1"
+            android:id="@+id/submit_button"
             style="@style/button"/>
         <Button
             android:layout_width="0dp"
@@ -61,8 +61,8 @@
             android:layout_weight="1"
             android:layout_toRightOf="@+id/submit_button"
             android:layout_below="@+id/textAnswer4"
-            android:text="@string/cancle"
-            android:id="@+id/cancle_button1"
+            android:text="@string/cancel"
+            android:id="@+id/cancle_button"
             style="@style/button"/>
     </LinearLayout>
 </RelativeLayout>

@@ -22,6 +22,9 @@
         <activity android:name=".EditeTFQuest" />
         <activity android:name=".ShowQuest" />
         <activity android:name=".ShowDetail"></activity>
+
+
     </application>
+    <supports-screens android:requiresSmallestWidthDp="600" />
 
 </manifest>

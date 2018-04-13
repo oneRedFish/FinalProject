@@ -26,4 +26,13 @@
     <style name="rb" parent="">
         <item name="android:textSize">15sp</item>
     </style>
+    <style name="author" parent="">
+        <item name="android:textSize">20sp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">#eec700</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAlignment">center</item>
+
+    </style>
 </resources>

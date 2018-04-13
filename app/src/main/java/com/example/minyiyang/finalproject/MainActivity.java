@@ -2,26 +2,63 @@ package com.example.minyiyang.finalproject;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
     protected static final String ACTIVITY_NAME = "MainActivity";
-    private Button quiz;
+    private Button button_quiz;
+    private Button button_xml;
+    private Button button_state;
+    private Button button_help;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        quiz= (Button) findViewById(R.id.button_quiz);
+        button_quiz= (Button) findViewById(R.id.button_quiz);
+        button_xml= (Button) findViewById(R.id.button_xml);
+        button_state= (Button) findViewById(R.id.button_state);
+        button_help= (Button) findViewById(R.id.button_help);
 
-        quiz.setOnClickListener(new View.OnClickListener() {
+        button_quiz.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ListQuestions.class);
-                startActivityForResult(intent, 50);
+                startActivityForResult(intent, 10);
+            }
+        });
+
+        button_xml.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ListQuestions.class);
+                startActivityForResult(intent, 20);
+            }
+        });
+
+        button_state.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ListQuestions.class);
+                startActivityForResult(intent, 30);
+            }
+        });
+
+        button_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //set dialog
+                final View conView = getLayoutInflater().inflate(R.layout.dialog_help, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setView(conView);
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 

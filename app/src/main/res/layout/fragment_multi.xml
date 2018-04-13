@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.minyiyang.finalproject.MultiFragment">
+    tools:context="com.example.minyiyang.finalproject.MultiFragment"
+    android:id="@+id/mutil">
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -23,11 +24,11 @@
     <RadioButton
         android:id="@+id/rb1"
         android:layout_width="wrap_content"
-        android:gravity="fill"
+        android:gravity="center"
         android:layout_below="@+id/QustCon"
         android:layout_height="wrap_content"
         android:text="A"
-        style="@style/rb"/>
+        style="@style/textQust"/>
     <TextView
         android:id="@+id/textCon1"
         android:layout_width="match_parent"
@@ -39,11 +40,11 @@
     <RadioButton
         android:id="@+id/rb2"
         android:layout_width="wrap_content"
-        android:gravity="fill"
+        android:gravity="center"
         android:layout_below="@+id/textCon1"
         android:layout_height="wrap_content"
         android:text="B"
-        style="@style/rb"/>
+        style="@style/textQust"/>
     <TextView
         android:id="@+id/textCon2"
         android:layout_width="match_parent"
@@ -55,11 +56,11 @@
     <RadioButton
         android:id="@+id/rb3"
         android:layout_width="wrap_content"
-        android:gravity="fill"
+        android:gravity="center"
         android:layout_below="@+id/textCon2"
         android:layout_height="wrap_content"
         android:text="C"
-        style="@style/rb"/>
+        style="@style/textQust"/>
     <TextView
         android:id="@+id/textCon3"
         android:layout_width="match_parent"
@@ -71,11 +72,11 @@
     <RadioButton
         android:id="@+id/rb4"
         android:layout_width="wrap_content"
-        android:gravity="fill"
+        android:gravity="center"
         android:layout_below="@+id/textCon3"
         android:layout_height="wrap_content"
         android:text="D"
-        style="@style/rb"/>
+        style="@style/textQust"/>
     <TextView
         android:id="@+id/textCon4"
         android:layout_width="match_parent"
