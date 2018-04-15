@@ -12,10 +12,17 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import java.security.PrivateKey;
+import java.util.regex.Pattern;
+
 public class EditeTFQuest extends Activity {
     protected static final String ACTIVITY_NAME = "EditeTFQuest";
     public DatabaseHelper mydb;
     private SQLiteDatabase db;
+    private EditText TF_quest;
+    private RadioButton RB1;
+    private RadioButton RB2;
+    private Long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,36 +36,47 @@ public class EditeTFQuest extends Activity {
         mydb = new DatabaseHelper(this);
         db = mydb.getWritableDatabase();
 
+        TF_quest= (EditText) findViewById(R.id.TF_quest);
+        RB1= (RadioButton) findViewById(R.id.rbt1);
+        RB2= (RadioButton) findViewById(R.id.rbt2);
         //save value to arraylist
         submit_button.setOnClickListener(new View.OnClickListener() {
-            EditText TF_quest= (EditText) findViewById(R.id.TF_quest);
-            RadioButton RB1= (RadioButton) findViewById(R.id.rbt1);
-            RadioButton RB2= (RadioButton) findViewById(R.id.rbt2);
-
-
-            EditText cor_answer= (EditText) findViewById(R.id.cor_answer);
             @Override
             public void onClick(View v) {
-                //insert data
-                ContentValues cv = new ContentValues();
-                cv.put(mydb.TF_QUEST, TF_quest.getText().toString());
-                if(RB1.isChecked())
-                    cv.put(mydb.TF_ANS, "true");
-                if(RB2.isChecked())
-                    cv.put(mydb.TF_ANS, "false");
+                String quest= TF_quest.getText().toString().trim();
+                if( quest.equals("")){
+                    TF_quest.setError("Cannot be null");
+                }
+                else if(!RB1.isChecked() && !RB2.isChecked()) {
+                    RB2.setError("please select one");
+                }else {
+                    //insert data
+                    ContentValues cv = new ContentValues();
+                    cv.put(mydb.TF_QUEST, TF_quest.getText().toString());
+                    if (RB1.isChecked())
+                        cv.put(mydb.TF_ANS, "true");
+                    if (RB2.isChecked())
+                        cv.put(mydb.TF_ANS, "false");
 
+                    if (id == 1) {
+                        db.insert(mydb.TF_TABLE, null, cv);
 
-                db.insert(mydb.TF_TABLE, null, cv);
+                        Toast toast = Toast.makeText(EditeTFQuest.this, "insert successful", Toast.LENGTH_SHORT); //this is the ListActivity
+                        toast.show(); //display box
+                    } else {
+                        db.update(mydb.TF_TABLE, cv, "TF_ID =" + id, null);
 
-                Toast toast = Toast.makeText(EditeTFQuest.this, "insert successful", Toast.LENGTH_SHORT); //this is the ListActivity
-                toast.show(); //display box
-                //reset data
-                TF_quest.setText("");
-                RB1.setText("");
-                RB2.setText("");
+                        Toast toast = Toast.makeText(EditeTFQuest.this, "update successful", Toast.LENGTH_SHORT); //this is the ListActivity
+                        toast.show(); //display box
+                    }
+                    //reset data
+                    TF_quest.setText("");
+                    RB1.setText("");
+                    RB2.setText("");
 
-                Intent intent = new Intent(EditeTFQuest.this, MainActivity.class);
-                startActivityForResult(intent, 60);
+                    Intent intent = new Intent(EditeTFQuest.this, ListQuestions.class);
+                    startActivityForResult(intent, 60);
+                }
             }
         });
 
@@ -72,6 +90,19 @@ public class EditeTFQuest extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        String quest = getIntent().getStringExtra("quest");
+        String ans = getIntent().getStringExtra("ans");
+
+        id = getIntent().getLongExtra("id",1);
+
+        TF_quest.setText(quest);
+        if(ans!=null) {
+            if (ans.equals("true")) {
+                RB1.setChecked(true);
+            } else {
+                RB2.setChecked(true);
+            }
+        }
         Log.i(ACTIVITY_NAME, "In onStart");
     }
 

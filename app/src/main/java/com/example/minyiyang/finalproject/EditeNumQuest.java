@@ -11,10 +11,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.regex.Pattern;
+
 public class EditeNumQuest extends Activity {
     protected static final String ACTIVITY_NAME = "EditeNumQuest";
     public DatabaseHelper mydb;
     private SQLiteDatabase db;
+    private EditText Num_quest;
+    private EditText Num_answer;
+    private Long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,29 +33,46 @@ public class EditeNumQuest extends Activity {
         mydb = new DatabaseHelper(this);
         db = mydb.getWritableDatabase();
 
+        Num_quest= (EditText) findViewById(R.id.Num_quest);
+        Num_answer= (EditText) findViewById(R.id.Num_answer);
         //save value to arraylist
         submit_button.setOnClickListener(new View.OnClickListener() {
-            EditText Num_quest= (EditText) findViewById(R.id.Num_quest);
-            EditText Num_answer= (EditText) findViewById(R.id.Num_answer);
 
-            EditText cor_answer= (EditText) findViewById(R.id.cor_answer);
             @Override
             public void onClick(View v) {
-                //insert data
-                ContentValues cv = new ContentValues();
-                cv.put(mydb.Num_QUEST, Num_quest.getText().toString());
-                cv.put(mydb.Num_ANS, Num_answer.getText().toString());
+                String quest=Num_quest.getText().toString().trim();
+                String answer=Num_answer.getText().toString().trim();
+                if( quest.equals("")){
+                    Num_quest.setError("Cannot be null");
+                }
+                else if(answer.equals("") || !Pattern.matches("([1-9]\\d*(\\.\\d*[1-9])?)|(0\\.\\d*[1-9])",answer)) {
+                    Num_answer.setError("Cannot be null and please enter a float greater than 0");
+                }
+                else {
+                    float num =  Float.parseFloat(answer);
+                    //insert data
+                    ContentValues cv = new ContentValues();
+                    cv.put(mydb.Num_QUEST, quest);
+                    cv.put(mydb.Num_ANS, String.format("%.2f", num));
 
-                db.insert(mydb.Num_TABLE, null, cv);
+                    if (id == 1) {
+                        db.insert(mydb.Num_TABLE, null, cv);
 
-                Toast toast = Toast.makeText(EditeNumQuest.this, "insert successful", Toast.LENGTH_SHORT); //this is the ListActivity
-                toast.show(); //display box
-                //reset data
-                Num_quest.setText("");
-                Num_answer.setText("");
+                        Toast toast = Toast.makeText(EditeNumQuest.this, "insert successful", Toast.LENGTH_SHORT); //this is the ListActivity
+                        toast.show(); //display box
+                    } else {
+                        db.update(mydb.Num_TABLE, cv, "Num_ID =" + id, null);
 
-                Intent intent = new Intent(EditeNumQuest.this, MainActivity.class);
-                startActivityForResult(intent, 60);
+                        Toast toast = Toast.makeText(EditeNumQuest.this, "update successful", Toast.LENGTH_SHORT); //this is the ListActivity
+                        toast.show(); //display box
+                    }
+                    //reset data
+                    Num_quest.setText("");
+                    Num_answer.setText("");
+
+                    Intent intent = new Intent(EditeNumQuest.this, ListQuestions.class);
+                    startActivityForResult(intent, 60);
+                }
             }
         });
 
@@ -64,6 +86,14 @@ public class EditeNumQuest extends Activity {
     @Override
     protected void onStart() {
         super.onStart();
+        String quest = getIntent().getStringExtra("quest");
+        String ans = getIntent().getStringExtra("ans");
+
+        id = getIntent().getLongExtra("id",1);
+
+        Num_quest.setText(quest);
+        Num_answer.setText(ans);
+
         Log.i(ACTIVITY_NAME, "In onStart");
     }
 

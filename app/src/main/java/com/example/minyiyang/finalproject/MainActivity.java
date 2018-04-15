@@ -45,8 +45,12 @@ public class MainActivity extends AppCompatActivity {
         button_state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ListQuestions.class);
-                startActivityForResult(intent, 30);
+                //set dialog
+                final View conView = getLayoutInflater().inflate(R.layout.dialog_help, null);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setView(conView);
+                AlertDialog dialog = builder.create();
+                dialog.show();
             }
         });
 
@@ -54,11 +58,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //set dialog
-                final View conView = getLayoutInflater().inflate(R.layout.dialog_help, null);
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setView(conView);
-                AlertDialog dialog = builder.create();
-                dialog.show();
+//                final View conView = getLayoutInflater().inflate(R.layout.dialog_statistic, null);
+//                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+//                builder.setView(conView);
+//                AlertDialog dialog = builder.create();
+//                dialog.show();
             }
         });
 

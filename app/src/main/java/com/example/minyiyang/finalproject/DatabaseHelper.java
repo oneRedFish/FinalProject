@@ -13,7 +13,7 @@ import android.util.Log;
 public class DatabaseHelper extends SQLiteOpenHelper {
     //Mutil quest table
     public static final String DATABASE_NAME = "Quest.db";
-    public static final int VERSION_NUM = 5;
+    public static final int VERSION_NUM = 3;
     public static final String Mtil_TABLE = "Mtil_T";
     public static final String Mtil_ID = "Mtil_ID";
     public static final String Mtil_QUEST = "Mtil_QUEST";

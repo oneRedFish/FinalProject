@@ -27,9 +27,13 @@ public class MultiFragment extends Fragment {
     Button update_b;
     Boolean isTablet;
     Long id;
+    String quest;
+    String ans1;
+    String ans2;
+    String ans3;
+    String ans4;
+    String croans;
     private SQLiteDatabase writableDB;
-    protected ListQuestions listQuestions;
-    Bundle bundle;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -58,19 +62,20 @@ public class MultiFragment extends Fragment {
 
         isTablet = getInfo.getBoolean("isTablet");
         id = getInfo.getLong("id");
-        String ans1 = getInfo.getString("textCon1");
-        String ans2 = getInfo.getString("textCon2");
-        String ans3 = getInfo.getString("textCon3");
-        String ans4 = getInfo.getString("textCon4");
+        quest = getInfo.getString("QustCon");
+        ans1 = getInfo.getString("textCon1");
+        ans2 = getInfo.getString("textCon2");
+        ans3 = getInfo.getString("textCon3");
+        ans4 = getInfo.getString("textCon4");
 
-        QustCon.setText(getInfo.getString("QustCon"));
+        QustCon.setText(quest);
         textCon1.setText(ans1);
         textCon2.setText(ans2);
         textCon3.setText(ans3);
         textCon4.setText(ans4);
-
-        String croans= getInfo.getString("corans");
-
+        //correct answer
+        croans= getInfo.getString("corans");
+        //set RadioButton
         if(croans.equals(ans1))
             rb1.setChecked(true);
         else if(croans.equals(ans2))
@@ -93,7 +98,7 @@ public class MultiFragment extends Fragment {
                 }else{
                     Intent intent = new Intent();
                     intent.putExtra("id", id);
-                    getActivity().setResult(Activity.RESULT_OK, intent);
+                    getActivity().setResult(11, intent);
                     getActivity().finish();
                 }
             }
@@ -104,8 +109,13 @@ public class MultiFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(),EditeMultiQuest.class);
                 intent.putExtra("id", id);
-                getActivity().setResult(Activity.RESULT_OK, intent);
-                startActivityForResult(intent, 4);
+                intent.putExtra("quest", quest);
+                intent.putExtra("ans1", ans1);
+                intent.putExtra("ans2", ans2);
+                intent.putExtra("ans3", ans3);
+                intent.putExtra("ans4", ans4);
+                intent.putExtra("croans", croans);
+                startActivity(intent);
             }
         });
 

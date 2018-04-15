@@ -4,6 +4,10 @@
     <string name="button_quzie">问题</string>
     <string name="button_xml">来源于 Xml</string>
     <string name="button_state">状态</string>
+    <string name="total_num">问题总数：</string>
+    <string name="longest">最长的问题：</string>
+    <string name="shortest">最短的问题：</string>
+    <string name="average">平均问题长度：</string>
     <string name="button_help">帮助</string>
     <string name="addMultiQuest">单选题</string>
     <string name="addNumQuest">运算题</string>
@@ -11,6 +15,7 @@
     <string name="textQust">题目:</string>
     <string name="textAns">答案:</string>
     <string name="input_quest">请在此输入内容</string>
+    <string name="input_hite">请在此输入小数并保留2位容</string>
     <string name="submit">提交</string>
     <string name="cancel">取消</string>
     <string name="rbt">正确</string>

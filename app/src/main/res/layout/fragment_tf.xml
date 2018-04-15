@@ -16,7 +16,7 @@
             android:text="@string/textQust"
             style="@style/textQust"/>
         <TextView
-            android:id="@+id/NumQust"
+            android:id="@+id/TFQust"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/textQust"
@@ -27,27 +27,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/textAns"
-                android:layout_below="@+id/NumQust"
+                android:layout_below="@+id/TFQust"
                 style="@style/textQust"/>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/NumAns"
+            android:orientation="horizontal"
+            android:id="@+id/RGroup">
             <RadioButton
                 android:id="@+id/rbt1"
                 android:layout_width="wrap_content"
                 android:gravity="fill"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/NumAns"
                 android:text="@string/rbt" />
             <RadioButton
                 android:id="@+id/rbt2"
                 android:layout_width="wrap_content"
                 android:gravity="fill"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/NumAns"
                 android:layout_toRightOf="@+id/rbt1"
                 android:text="@string/rbf" />
+        </RadioGroup>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/rbt2">
+            android:layout_below="@+id/RGroup">
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

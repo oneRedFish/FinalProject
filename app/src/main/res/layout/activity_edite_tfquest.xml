@@ -33,13 +33,18 @@
         android:text="@string/textAns"
         android:layout_below="@+id/TF_quest"
         style="@style/textQust"/>
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/TF_Ans"
+        android:orientation="horizontal"
+        android:id="@+id/RGroup">
     <RadioButton
         android:id="@+id/rbt1"
         android:layout_width="wrap_content"
         android:gravity="fill"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TF_Ans"
         android:text="@string/rbt" />
     <RadioButton
         android:id="@+id/rbt2"
@@ -47,14 +52,13 @@
         android:gravity="fill"
         android:layout_weight="1"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/TF_Ans"
         android:layout_toRightOf="@+id/rbt1"
         android:text="@string/rbf" />
-
+    </RadioGroup>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/rbt1"
+        android:layout_below="@+id/RGroup"
         >
         <Button
             android:layout_width="0dp"

@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -35,6 +34,7 @@ public class ListQuestions extends Activity {
     private Cursor cursor1;
     private Cursor cursor2;
     private Bundle infoToPass;
+
     MultiAdapter multiAdapter;
 
     ArrayList<String> content = new ArrayList<>();
@@ -42,7 +42,7 @@ public class ListQuestions extends Activity {
     ArrayList<String> content2 = new ArrayList<>();
 
     private boolean isTablet;
-
+    private String type="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +66,7 @@ public class ListQuestions extends Activity {
             @Override
             public void onClick(View v) {
                 //set dialog
-                final View conView = getLayoutInflater().inflate(R.layout.dailog_choose, null);
+                final View conView = getLayoutInflater().inflate(R.layout.dialog_choose, null);
                 AlertDialog.Builder builder = new AlertDialog.Builder(ListQuestions.this);
                 builder.setView(conView);
                 Button addMultiQuest = (Button)conView.findViewById(R.id.addMultiQuest);
@@ -180,6 +180,8 @@ public class ListQuestions extends Activity {
                 infoToPass.putString("textCon4", ans4);
                 infoToPass.putString("corans", corans);
                 infoToPass.putLong("id", id);
+                type = "isMulti";
+                infoToPass.putString("type", type);
                 infoToPass.putBoolean("isTablet", isTablet);
                 //if on tablet:
                 if (isTablet) {
@@ -199,21 +201,112 @@ public class ListQuestions extends Activity {
                 }
             }
         });
+
+        //click list items
+        NumQuest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String note = String.valueOf(parent.getItemAtPosition(position));
+                Toast.makeText(ListQuestions.this, note, Toast.LENGTH_LONG).show();
+                cursor2.moveToPosition(position);
+                id = cursor2.getLong(cursor2.getColumnIndex(mydb.Num_ID));
+                String quest = cursor2.getString(cursor2.getColumnIndex(mydb.Num_QUEST));
+                String ans = cursor2.getString(cursor2.getColumnIndex(mydb.Num_ANS));
+
+                Log.i(ACTIVITY_NAME, "Cursor’s column id =" + id);
+                //put data into bundle
+                infoToPass.putString("NumCon", quest);
+                infoToPass.putString("NumAns", ans);
+                infoToPass.putLong("id", id);
+                type = "isNum";
+                infoToPass.putString("type", type);
+                infoToPass.putBoolean("isTablet", isTablet);
+                //if on tablet:
+                if (isTablet) {
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    NumFragment df = new NumFragment();
+                    df.setArguments(infoToPass);
+                    ft.addToBackStack(null); //only undo FT on back button
+                    ft.replace(R.id.fl, df);
+                    ft.commit();
+                }
+                else //this is a phone:
+                {
+                    Intent next = new Intent(ListQuestions.this, ShowQuest.class);
+                    next.putExtras(infoToPass);
+                    startActivityForResult(next, 4);
+                }
+            }
+        });
+
+        //click list items
+        TFQuest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String note = String.valueOf(parent.getItemAtPosition(position));
+                Toast.makeText(ListQuestions.this, note, Toast.LENGTH_LONG).show();
+                cursor1.moveToPosition(position);
+                id = cursor1.getLong(cursor1.getColumnIndex(mydb.TF_ID));
+                String quest = cursor1.getString(cursor1.getColumnIndex(mydb.TF_QUEST));
+                String ans = cursor1.getString(cursor1.getColumnIndex(mydb.TF_ANS));
+
+                Log.i(ACTIVITY_NAME, "Cursor’s column id =" + id);
+                //put data into bundle
+                infoToPass.putString("TFCon", quest);
+                infoToPass.putString("TFAns", ans);
+                infoToPass.putLong("id", id);
+                type = "isTF";
+                infoToPass.putString("type", type);
+                infoToPass.putBoolean("isTablet", isTablet);
+                //if on tablet:
+                if (isTablet) {
+                    FragmentManager fm = getFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    TFFragment df = new TFFragment();
+                    df.setArguments(infoToPass);
+                    ft.addToBackStack(null); //only undo FT on back button
+                    ft.replace(R.id.fl, df);
+                    ft.commit();
+                }
+                else //this is a phone:
+                {
+                    Intent next = new Intent(ListQuestions.this, ShowQuest.class);
+                    next.putExtras(infoToPass);
+                    startActivityForResult(next, 5);
+                }
+            }
+        });
     }
     //delete data on phone and renew list
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == 3) {
+        if (resultCode == 11) {
             Bundle basket = data.getExtras();
             Long id = basket.getLong("id");
             db.delete(mydb.Mtil_TABLE, mydb.Mtil_ID + "=" + id, null);
-            Log.i("ChatWindow", id + " is deleted");
-            content.clear();
-            content1.clear();
-            content2.clear();
-            showData();
+            Log.i("Mtil_TABLE", id + " is deleted");
         }
+
+        if (resultCode == 12) {
+            Bundle basket = data.getExtras();
+            Long id = basket.getLong("id");
+            db.delete(mydb.Num_TABLE, mydb.Num_ID + "=" + id, null);
+            Log.i("Num_TABLE", id + " is deleted");
+        }
+
+        if (resultCode == 13) {
+            Bundle basket = data.getExtras();
+            Long id = basket.getLong("id");
+            db.delete(mydb.TF_TABLE, mydb.TF_ID + "=" + id, null);
+            Log.i("TF_TABLE", id + " is deleted");
+        }
+        //renew list
+        content.clear();
+        content1.clear();
+        content2.clear();
+        showData();
     }
 
     @Override

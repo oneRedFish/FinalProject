@@ -2,7 +2,11 @@
     <string name="app_name">FinalProject</string>
     <string name="button_quzie">Quize</string>
     <string name="button_xml">From Xml</string>
-    <string name="button_state">States</string>
+    <string name="button_state">Statistics</string>
+    <string name="total_num">Total number of questions:</string>
+    <string name="longest">Longest length of questions:</string>
+    <string name="shortest">Shortest length of questions:</string>
+    <string name="average">Average length of questions:</string>
     <string name="button_help">Help</string>
     <string name="addMultiQuest">MultiQuest</string>
     <string name="addNumQuest">NumQuest</string>
@@ -10,6 +14,7 @@
     <string name="textQust">Quest:</string>
     <string name="textAns">Answer:</string>
     <string name="input_quest">Input question here</string>
+    <string name="input_hite">Input a two digits float</string>
     <string name="submit">submit</string>
     <string name="cancel">cancel</string>
     <string name="rbt">true</string>
