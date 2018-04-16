@@ -128,7 +128,7 @@ public class EditeMultiQuest extends Activity {
         String ans4 = getIntent().getStringExtra("ans4");
         String croans = getIntent().getStringExtra("croans");
         id = getIntent().getLongExtra("id",1);
-
+        Log.i(ACTIVITY_NAME, "id : "+id);
         input_quest.setText(quest);
         input_answer1.setText(ans1);
         input_answer2.setText(ans2);

@@ -30,19 +30,27 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ListQuestions.class);
-                startActivityForResult(intent, 10);
+                startActivity(intent);
             }
         });
 
         button_xml.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ListQuestions.class);
-                startActivityForResult(intent, 20);
+                Intent intent = new Intent(MainActivity.this, AsyncTask.class);
+                startActivity(intent);
             }
         });
 
         button_state.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, DialogStatistics.class);
+                startActivity(intent);
+            }
+        });
+
+        button_help.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //set dialog
@@ -51,18 +59,6 @@ public class MainActivity extends AppCompatActivity {
                 builder.setView(conView);
                 AlertDialog dialog = builder.create();
                 dialog.show();
-            }
-        });
-
-        button_help.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //set dialog
-//                final View conView = getLayoutInflater().inflate(R.layout.dialog_statistic, null);
-//                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-//                builder.setView(conView);
-//                AlertDialog dialog = builder.create();
-//                dialog.show();
             }
         });
 

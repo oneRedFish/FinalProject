@@ -16,6 +16,7 @@
     <string name="textAns">答案:</string>
     <string name="input_quest">请在此输入内容</string>
     <string name="input_hite">请在此输入小数并保留2位容</string>
+    <string name="input_acc">请输入精确到小数后几位</string>
     <string name="submit">提交</string>
     <string name="cancel">取消</string>
     <string name="rbt">正确</string>
@@ -27,7 +28,7 @@
     <string name="author">作者 : 杨闵奕</string>
     <string name="intro">介绍 :</string>
     <string name="chose">选中一个类型</string>
-
+    <string name="textAcc">精确到:</string>
     <string name="des"> [ 1 ]在Java编程语言中，接口是引用类型，类似于类，
         [ 2 ]它只能包含常量、方法签名、默认方法、静态方法，和嵌套类型。方法主体仅适用于默认方法和静态方法。
         [ 3 ]接口不能实例化—它们只能由类实现或由其他接口扩展。</string>

@@ -4,21 +4,35 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.database.Cursor;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import android.os.AsyncTask;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import static android.view.View.VISIBLE;
 
 public class ListQuestions extends Activity {
     protected static final String ACTIVITY_NAME = "ListQuestions";
@@ -34,7 +48,6 @@ public class ListQuestions extends Activity {
     private Cursor cursor1;
     private Cursor cursor2;
     private Bundle infoToPass;
-
     MultiAdapter multiAdapter;
 
     ArrayList<String> content = new ArrayList<>();
@@ -44,7 +57,7 @@ public class ListQuestions extends Activity {
     private boolean isTablet;
     private String type="";
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_questions);
         NumQuest = (ListView) findViewById(R.id.NumQuesView);
@@ -56,6 +69,8 @@ public class ListQuestions extends Activity {
         pb=(ProgressBar) findViewById(R.id.pb);
         fl = (FrameLayout) findViewById(R.id.fl);
         isTablet = (fl != null);
+        //download from xml
+        pb.setVisibility(VISIBLE);
 
         //initialize ChatDatabaseHelper
         mydb = new DatabaseHelper(this);
@@ -77,7 +92,7 @@ public class ListQuestions extends Activity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ListQuestions.this, EditeMultiQuest.class);
-                        startActivityForResult(intent, 10);
+                        startActivity(intent);
                     }
                 });
 
@@ -85,7 +100,7 @@ public class ListQuestions extends Activity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ListQuestions.this, EditeNumQuest.class);
-                        startActivityForResult(intent, 20);
+                        startActivity(intent);
                     }
                 });
 
@@ -93,7 +108,7 @@ public class ListQuestions extends Activity {
                     @Override
                     public void onClick(View v) {
                         Intent intent = new Intent(ListQuestions.this, EditeTFQuest.class);
-                        startActivityForResult(intent, 30);
+                        startActivity(intent);
                     }
                 });
 
@@ -105,7 +120,11 @@ public class ListQuestions extends Activity {
         //show data
         showData();
         action();
-
+        try {
+            process();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
     public void showData() {
@@ -113,10 +132,8 @@ public class ListQuestions extends Activity {
         cursor = db.query(false, mydb.Mtil_TABLE, new String[]{mydb.Mtil_ID, mydb.Mtil_QUEST,mydb.Mtil_ANS1,mydb.Mtil_ANS2,mydb.Mtil_ANS3,mydb.Mtil_ANS4,mydb.Mtil_CORRT}, null, null, null, null, null, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            int n=0;
             content.add(cursor.getString(cursor.getColumnIndex(mydb.Mtil_QUEST)));
             cursor.moveToNext();
-            n++;
         }
         multiAdapter=new MultiAdapter(this,R.layout.multi_row,R.id.MultiQuesView,content);
         MultiQuest.setAdapter(multiAdapter);
@@ -128,10 +145,8 @@ public class ListQuestions extends Activity {
         cursor1 = db.query(false, mydb.TF_TABLE, new String[]{mydb.TF_ID, mydb.TF_QUEST,mydb.TF_ANS}, null, null, null, null, null, null);
         cursor1.moveToFirst();
         while (!cursor1.isAfterLast()) {
-            int i=0;
             content1.add( cursor1.getString(cursor1.getColumnIndex(mydb.TF_QUEST)));
             cursor1.moveToNext();
-            i++;
         }
         TFAdapter tfAdapter =new TFAdapter(this,R.layout.tf_row,R.id.TFQuesView,content1);
         TFQuest.setAdapter(tfAdapter);
@@ -139,18 +154,28 @@ public class ListQuestions extends Activity {
         Log.i(ACTIVITY_NAME, "Cursor’s con =" + content1);
 
         //table3
-        cursor2 = db.query(false, mydb.Num_TABLE, new String[]{mydb.Num_ID, mydb.Num_QUEST,mydb.Num_ANS}, null, null, null, null, null, null);
+        cursor2 = db.query(false, mydb.Num_TABLE, new String[]{mydb.Num_ID, mydb.Num_QUEST,mydb.Num_ANS,mydb.Num_ACC}, null, null, null, null, null, null);
         cursor2.moveToFirst();
         while (!cursor2.isAfterLast()) {
-            int i=0;
             content2.add(cursor2.getString(cursor2.getColumnIndex(mydb.Num_QUEST)));
             cursor2.moveToNext();
-            i++;
         }
         NumAdapter numAdapter =new NumAdapter(this,R.layout.tf_row,R.id.TFQuesView,content2);
         NumQuest.setAdapter(numAdapter);
 
         Log.i(ACTIVITY_NAME, "Cursor’s con =" + content2);
+    }
+    public void process() throws InterruptedException {
+        int total = cursor.getCount()+cursor1.getCount()+cursor2.getCount();
+
+        for( int i=0; i<=total; i++){
+            pb.setProgress(i/total*100);
+            if(i==cursor.getCount()){
+                pb.setProgress(100);
+                //pb.setVisibility(View.INVISIBLE);
+                break;
+            }
+        }
     }
     public ArrayAdapter getAdapter(){
           return multiAdapter;
@@ -212,11 +237,13 @@ public class ListQuestions extends Activity {
                 id = cursor2.getLong(cursor2.getColumnIndex(mydb.Num_ID));
                 String quest = cursor2.getString(cursor2.getColumnIndex(mydb.Num_QUEST));
                 String ans = cursor2.getString(cursor2.getColumnIndex(mydb.Num_ANS));
+                String acc = cursor2.getString(cursor2.getColumnIndex(mydb.Num_ACC));
 
                 Log.i(ACTIVITY_NAME, "Cursor’s column id =" + id);
                 //put data into bundle
                 infoToPass.putString("NumCon", quest);
                 infoToPass.putString("NumAns", ans);
+                infoToPass.putString("NumAcc", acc);
                 infoToPass.putLong("id", id);
                 type = "isNum";
                 infoToPass.putString("type", type);
@@ -279,6 +306,7 @@ public class ListQuestions extends Activity {
         });
     }
     //delete data on phone and renew list
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -302,11 +330,14 @@ public class ListQuestions extends Activity {
             db.delete(mydb.TF_TABLE, mydb.TF_ID + "=" + id, null);
             Log.i("TF_TABLE", id + " is deleted");
         }
+
         //renew list
         content.clear();
         content1.clear();
         content2.clear();
         showData();
+        LinearLayout lay = (LinearLayout) findViewById(R.id.lay);
+        Snackbar.make(lay, "delete successfully", Snackbar.LENGTH_LONG).setAction("Action", null).show();
     }
 
     @Override
@@ -332,4 +363,6 @@ public class ListQuestions extends Activity {
         super.onDestroy();
         Log.i(ACTIVITY_NAME, "In onDestroy");
     }
+
+
 }

@@ -19,6 +19,7 @@ public class EditeNumQuest extends Activity {
     private SQLiteDatabase db;
     private EditText Num_quest;
     private EditText Num_answer;
+    private EditText Num_ancc;
     private Long id;
 
     @Override
@@ -35,6 +36,8 @@ public class EditeNumQuest extends Activity {
 
         Num_quest= (EditText) findViewById(R.id.Num_quest);
         Num_answer= (EditText) findViewById(R.id.Num_answer);
+        Num_ancc= (EditText) findViewById(R.id.Num_ancc);
+
         //save value to arraylist
         submit_button.setOnClickListener(new View.OnClickListener() {
 
@@ -42,18 +45,26 @@ public class EditeNumQuest extends Activity {
             public void onClick(View v) {
                 String quest=Num_quest.getText().toString().trim();
                 String answer=Num_answer.getText().toString().trim();
+                String ancc=Num_ancc.getText().toString().trim();
+                Log.i("num acc","acc "+ancc);
                 if( quest.equals("")){
                     Num_quest.setError("Cannot be null");
                 }
                 else if(answer.equals("") || !Pattern.matches("([1-9]\\d*(\\.\\d*[1-9])?)|(0\\.\\d*[1-9])",answer)) {
                     Num_answer.setError("Cannot be null and please enter a float greater than 0");
                 }
+                else if(ancc.equals("") || !Pattern.matches("^[0-9]\\d*$",ancc)) {
+                    Num_ancc.setError("Cannot be null and please enter a number equal or greater than 0");
+                }
                 else {
                     float num =  Float.parseFloat(answer);
+                    int acc = Integer.parseInt(ancc);
+
                     //insert data
                     ContentValues cv = new ContentValues();
                     cv.put(mydb.Num_QUEST, quest);
-                    cv.put(mydb.Num_ANS, String.format("%.2f", num));
+                    cv.put(mydb.Num_ANS, String.format("%."+acc+"f", num));
+                    cv.put(mydb.Num_ACC, ancc);
 
                     if (id == 1) {
                         db.insert(mydb.Num_TABLE, null, cv);
@@ -69,6 +80,7 @@ public class EditeNumQuest extends Activity {
                     //reset data
                     Num_quest.setText("");
                     Num_answer.setText("");
+                    Num_ancc.setText("");
 
                     Intent intent = new Intent(EditeNumQuest.this, ListQuestions.class);
                     startActivityForResult(intent, 60);
@@ -88,11 +100,13 @@ public class EditeNumQuest extends Activity {
         super.onStart();
         String quest = getIntent().getStringExtra("quest");
         String ans = getIntent().getStringExtra("ans");
+        String acc = getIntent().getStringExtra("acc");
 
         id = getIntent().getLongExtra("id",1);
 
         Num_quest.setText(quest);
         Num_answer.setText(ans);
+        Num_ancc.setText(acc);
 
         Log.i(ACTIVITY_NAME, "In onStart");
     }

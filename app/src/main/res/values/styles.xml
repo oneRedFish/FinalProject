@@ -11,6 +11,13 @@
     <style name="textQust" parent="">
         <item name="android:textSize">20sp</item>
         <item name="android:padding">10dp</item>
+        <item name="android:textColor">#333</item>
+    </style>
+    <style name="text_num" parent="">
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingTop">20dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#333</item>
     </style>
     <style name="input" parent="">
         <item name="android:textSize">15sp</item>

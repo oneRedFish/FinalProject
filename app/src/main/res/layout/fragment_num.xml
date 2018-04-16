@@ -25,7 +25,7 @@
         <!--con-->
         <TextView
             android:id="@+id/textAnswer1"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/QustCon"
             android:text="@string/textAns"
@@ -36,6 +36,19 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/QustCon"
             android:layout_toRightOf="@+id/textAnswer1"
+            style="@style/textQust"/>
+        <!--accuracy-->
+        <TextView
+            android:id="@+id/NumAcc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/textAcc"
+            android:layout_below="@+id/Numans"
+            style="@style/textQust"/>
+        <TextView
+            android:id="@+id/Numacc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             style="@style/textQust"/>
         <LinearLayout
             android:layout_width="match_parent"

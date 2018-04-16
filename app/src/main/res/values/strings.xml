@@ -15,6 +15,7 @@
     <string name="textAns">Answer:</string>
     <string name="input_quest">Input question here</string>
     <string name="input_hite">Input a two digits float</string>
+    <string name="input_acc">Input an accuracy digit</string>
     <string name="submit">submit</string>
     <string name="cancel">cancel</string>
     <string name="rbt">true</string>
@@ -23,6 +24,7 @@
     <string name="del">delete</string>
     <string name="update">update</string>
     <string name="set_answer">set anwser</string>
+    <string name="textAcc">Accuracy:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="author">Author : Minyi Yang</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>

@@ -27,6 +27,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String Num_ID = "Num_ID";
     public static final String Num_QUEST = "Num_QUEST";
     public static final String Num_ANS = "Num_ANS";
+    public static final String Num_ACC = "Num_ACC";
+
     //t/f quest table
     public static final String TF_TABLE = "TF_T";
     public static final String TF_ID = "TF_ID";
@@ -48,7 +50,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                     Mtil_CORRT + " TEXT)");
 
             db.execSQL("CREATE TABLE " + Num_TABLE + " (" + Num_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + Num_QUEST + " TEXT," +
-                    Num_ANS + " TEXT)");
+                    Num_ANS + " TEXT,"+ Num_ACC + " TEXT)");
 
             db.execSQL("CREATE TABLE " + TF_TABLE + " (" + TF_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + TF_QUEST + " TEXT," +
                     TF_ANS + " TEXT)");

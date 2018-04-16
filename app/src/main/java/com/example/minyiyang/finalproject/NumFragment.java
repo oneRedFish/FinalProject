@@ -11,19 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 public class NumFragment extends Fragment {
     Bundle getInfo;
     TextView NumQust;
     TextView Numans;
+    TextView Numacc;
     Button del_b;
     Button update_b;
     Boolean isTablet;
     Long id;
     String quest;
     String ans;
+    String acc;
 
     private SQLiteDatabase writableDB;
 
@@ -39,8 +40,8 @@ public class NumFragment extends Fragment {
         View gui = inflater.inflate(R.layout.fragment_num, null);
 
         NumQust = (TextView) gui.findViewById(R.id.NumQust);
-
         Numans = (TextView) gui.findViewById(R.id.Numans);
+        Numacc = (TextView) gui.findViewById(R.id.Numacc);
 
         del_b = (Button) gui.findViewById(R.id.del_b);
         update_b = (Button) gui.findViewById(R.id.update_b);
@@ -49,9 +50,11 @@ public class NumFragment extends Fragment {
         id = getInfo.getLong("id");
         quest = getInfo.getString("NumCon");
         ans = getInfo.getString("NumAns");
+        acc = getInfo.getString("NumAcc");
 
         NumQust.setText(quest);
         Numans.setText(ans);
+        Numacc.setText(acc);
 
         del_b.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +82,7 @@ public class NumFragment extends Fragment {
                 intent.putExtra("id", id);
                 intent.putExtra("quest", quest);
                 intent.putExtra("ans", ans);
-
+                intent.putExtra("acc", acc);
                 startActivity(intent);
             }
         });
