@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.util.Log;
@@ -23,15 +21,6 @@ import android.database.Cursor;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import android.os.AsyncTask;
-import org.xmlpull.v1.XmlPullParser;
-import org.xmlpull.v1.XmlPullParserException;
-import org.xmlpull.v1.XmlPullParserFactory;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import static android.view.View.VISIBLE;
 
 public class ListQuestions extends Activity {
@@ -122,6 +111,7 @@ public class ListQuestions extends Activity {
         action();
         try {
             process();
+
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -167,8 +157,7 @@ public class ListQuestions extends Activity {
     }
     public void process() throws InterruptedException {
         int total = cursor.getCount()+cursor1.getCount()+cursor2.getCount();
-
-        for( int i=0; i<=total; i++){
+        for( int i=1; i<=total; i++){
             pb.setProgress(i/total*100);
             if(i==cursor.getCount()){
                 pb.setProgress(100);

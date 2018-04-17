@@ -60,6 +60,7 @@
                 android:layout_weight="1"
                 android:text="@string/del"
                 android:id="@+id/del_b"
+                android:background="@drawable/button1"
                 style="@style/button"/>
             <Button
                 android:layout_width="0dp"
@@ -67,6 +68,7 @@
                 android:layout_weight="1"
                 android:text="@string/update"
                 android:id="@+id/update_b"
+                android:background="@drawable/button1"
                 style="@style/button"/>
         </LinearLayout>
     </LinearLayout>

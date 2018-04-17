@@ -134,6 +134,7 @@
         android:layout_below="@+id/cor_answer"
         android:text="@string/submit"
         android:id="@+id/submit_button"
+        android:background="@drawable/button1"
         style="@style/button"/>
     <Button
         android:layout_width="0dp"
@@ -143,6 +144,7 @@
         android:layout_below="@+id/textAnswer4"
         android:text="@string/cancel"
         android:id="@+id/cancle_button"
+        android:background="@drawable/button1"
         style="@style/button"/>
 </LinearLayout>
 </RelativeLayout>

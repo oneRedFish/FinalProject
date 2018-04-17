@@ -37,4 +37,6 @@
         and nested types. Method bodies exist only for default methods and static methods.
         [3] Interfaces cannot be instantiated—they can only be implemented by classes or extended by other interfaces.
     </string>
+    <string name="title_activity_toolbar">Toolbar</string>
+    <string name="title_activity_test_toolbar">TestToolbar</string>
 </resources>

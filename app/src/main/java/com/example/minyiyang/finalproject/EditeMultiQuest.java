@@ -26,7 +26,6 @@ public class EditeMultiQuest extends Activity {
     private EditText input_answer4;
     private EditText cor_answer;
     private Long id;
-    private RelativeLayout mutil_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +35,6 @@ public class EditeMultiQuest extends Activity {
         Button submit_button = (Button) findViewById(R.id.submit_button);
         Button cancle_button = (Button) findViewById(R.id.cancle_button);
 
-        mutil_view = (RelativeLayout) findViewById(R.id.mutil_view);
         //initialize ChatDatabaseHelper
         mydb = new DatabaseHelper(this);
         db = mydb.getWritableDatabase();

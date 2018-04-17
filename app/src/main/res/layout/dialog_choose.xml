@@ -16,23 +16,32 @@
     android:layout_width="0dp"
     android:layout_height="60dp"
     android:layout_weight="1"
+        android:layout_marginBottom="5dp"
     android:layout_alignParentBottom="true"
-    android:text="@string/addMultiQuest" />
+        android:background="@drawable/button1"
+    android:text="@string/addMultiQuest"
+        style="@style/button"/>
     <Button
     android:id="@+id/addNumQuest"
     android:layout_width="0dp"
     android:layout_weight="1"
     android:layout_height="60dp"
-    android:layout_toRightOf="@+id/addMultiQuest"
+        android:layout_marginBottom="5dp"
+        android:layout_toRightOf="@+id/addMultiQuest"
     android:layout_alignParentBottom="true"
-    android:text="@string/addNumQuest" />
+        android:background="@drawable/button1"
+        android:text="@string/addNumQuest"
+        style="@style/button"/>
     <Button
     android:id="@+id/addTFQuest"
     android:layout_width="0dp"
     android:layout_height="60dp"
     android:layout_weight="1"
-    android:layout_toRightOf="@+id/addNumQuest"
+        android:layout_marginBottom="5dp"
+        android:layout_toRightOf="@+id/addNumQuest"
     android:layout_alignParentBottom="true"
-    android:text="@string/addTFQuest" />
+        android:background="@drawable/button1"
+        android:text="@string/addTFQuest"
+        style="@style/button"/>
 </LinearLayout>
 </RelativeLayout>
